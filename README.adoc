@@ -1,0 +1,48 @@
+= create-github-release
+
+Create a GitHub Release from the command-line.
+
+== Requirements
+
+This is a Ruby script and has currently only been tested with Ruby 2.5.
+
+== Usage
+
+[source,sh]
+----
+bundle install
+bundle exec ./create-github-release.rb my-repo my-tag file1 file2
+----
+
+More in-depth examples:
+
+[source,sh]
+----
+# this assumes you have GITHUB_API_TOKEN set in your environment
+bundle exec ./create-github-release.rb \
+    riboseinc/rpm-spec-botan2 \
+    2.9.0-1.el7 \
+    botan2-2.9.0-1.el7.x86_64.rpm
+
+# if you have MY_GITHUB_API_TOKEN set in your environment
+# (also demonstrates passing multiple assets and customizing options)
+bundle exec ./create-github-release.rb \
+    riboseinc/rpm-spec-botan2 \
+    2.9.0-1.el7 \
+    --name 'My first release' \
+    --release-notes 'My release notes' \
+    --api-token-env-var MY_GITHUB_API_TOKEN \
+    botan2-2.9.0-1.el7.x86_64.rpm \
+    botan2-devel-2.9.0-1.el7.x86_64.rpm
+
+# if you just want to pass the API token directly
+bundle exec ./create-github-release.rb \
+    riboseinc/rpm-spec-botan2 \
+    2.9.0-1.el7 \
+    --name 'My first release' \
+    --release-notes 'My release notes' \
+    --api-token my-secret-token \
+    botan2-2.9.0-1.el7.x86_64.rpm
+----
+
+
